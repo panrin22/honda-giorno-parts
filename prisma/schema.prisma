@@ -1,0 +1,52 @@
+// Prisma schema for Giorno Parts Clone
+// Matches the structure and features of giornoparts.com
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"   // เปลี่ยนเป็น "postgresql" เมื่อ Deploy จริง
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  products  Product[]
+  articles  Article[]
+  createdAt DateTime  @default(now())
+}
+
+model Product {
+  id            String    @id @default(cuid())
+  name          String
+  slug          String    @unique
+  price         Int
+  discountPrice Int?
+  shopeeUrl     String
+  images        String    // JSON array of image paths or URLs
+  description   String?
+  specs         String?   // JSON string for specs
+  categoryId    String
+  category      Category  @relation(fields: [categoryId], references: [id])
+  isPopular     Boolean   @default(false)
+  views         Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Article {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  content     String    // Markdown or HTML content
+  coverImage  String?
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id])
+  publishedAt DateTime?
+  views       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
