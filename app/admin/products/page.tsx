@@ -93,7 +93,7 @@ export default async function AdminProducts({ searchParams }: { searchParams: Pr
     getCategories(),
   ])
 
-  const editingProduct = editId ? products.find(p => p.id === editId) : null
+  const editingProduct = editId ? products.find((p: (typeof products)[number]) => p.id === editId) : null
 
   return (
     <div>
@@ -174,7 +174,7 @@ export default async function AdminProducts({ searchParams }: { searchParams: Pr
             </tr>
           </thead>
           <tbody className="divide-y divide-white/10">
-            {products.map((p) => {
+            {products.map((p: (typeof products)[number]) => {
               const hasDiscount = p.discountPrice && p.discountPrice < p.price
               return (
                 <tr key={p.id} className="hover:bg-white/5">
