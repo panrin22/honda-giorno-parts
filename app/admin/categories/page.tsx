@@ -73,7 +73,7 @@ export default async function AdminCategories() {
             </tr>
           </thead>
           <tbody className="divide-y divide-white/10">
-            {categories.map((cat) => (
+            {categories.map((cat: (typeof categories)[number]) => (
               <tr key={cat.id} className="hover:bg-white/5">
                 <td className="p-4 font-medium">{cat.name}</td>
                 <td className="p-4 text-[#9CA3AF] text-sm">{cat.slug}</td>
