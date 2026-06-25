@@ -7,7 +7,7 @@ import path from 'path'
 async function createArticle(formData: FormData) {
   'use server'
   const title = formData.get('title') as string
-  const slug = formData.get('slug') as string
+  const slug = formData.get('slug') as stringh
   const content = formData.get('content') as string
   const categoryId = formData.get('categoryId') as string || null
 
@@ -66,7 +66,7 @@ export default async function AdminArticles({ searchParams }: { searchParams: Pr
     prisma.category.findMany(),
   ])
 
-  const editingArticle = editId ? articles.find(a => a.id === editId) : null
+    const editingArticle = editId ? articles.find((a: (typeof articles)[number]) => a.id === editId) : null
 
   return (
     <div>
