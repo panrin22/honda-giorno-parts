@@ -90,7 +90,7 @@ export default async function AdminArticles({ searchParams }: { searchParams: Pr
 
           <select name="categoryId" className="bg-[#12121A] border border-white/10 rounded-xl px-4 py-3 w-full">
             <option value="">ไม่ระบุหมวดหมู่</option>
-            {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+            {categories.map((c: (typeof categories)[number]) => <option key={c.id} value={c.id}>{c.name}</option>)}
           </select>
 
           <textarea name="content" placeholder="เนื้อหาบทความ (รองรับ Markdown พื้นฐาน)" rows={8} className="w-full bg-[#12121A] border border-white/10 rounded-xl px-4 py-3" required />
@@ -126,7 +126,7 @@ export default async function AdminArticles({ searchParams }: { searchParams: Pr
             </tr>
           </thead>
           <tbody className="divide-y divide-white/10">
-            {articles.map((a) => (
+            {articles.map((a: (typeof articles)[number]) => (
               <tr key={a.id} className="hover:bg-white/5">
                 <td className="p-4 font-medium">{a.title}</td>
                 <td className="p-4 text-[#9CA3AF]">{a.category?.name || '-'}</td>
