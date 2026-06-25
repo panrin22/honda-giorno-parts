@@ -7,7 +7,7 @@ import path from 'path'
 async function createArticle(formData: FormData) {
   'use server'
   const title = formData.get('title') as string
-  const slug = formData.get('slug') as stringh
+  const slug = formData.get('slug') as string
   const content = formData.get('content') as string
   const categoryId = formData.get('categoryId') as string || null
 
