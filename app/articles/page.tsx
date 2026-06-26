@@ -17,7 +17,7 @@ export default async function ArticlesPage() {
 
       {articles.length > 0 ? (
         <div className="grid md:grid-cols-2 gap-4">
-          {articles.map((article) => (
+          {articles.map((article: (typeof articles)[number]) => (
             <Link 
               key={article.id} 
               href={`/article/${article.slug}`} 
