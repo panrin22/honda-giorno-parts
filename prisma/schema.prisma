@@ -1,14 +1,16 @@
 // Prisma schema for Giorno Parts Clone
 // Matches the structure and features of giornoparts.com
 
+
 generator client {
   provider = "prisma-client-js"
 }
 
+
 datasource db {
-    provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
 }
+
 
 model Category {
   id        String    @id @default(cuid())
@@ -18,6 +20,7 @@ model Category {
   articles  Article[]
   createdAt DateTime  @default(now())
 }
+
 
 model Product {
   id            String    @id @default(cuid())
@@ -34,19 +37,3 @@ model Product {
   isPopular     Boolean   @default(false)
   views         Int       @default(0)
   createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-}
-
-model Article {
-  id          String    @id @default(cuid())
-  title       String
-  slug        String    @unique
-  content     String    // Markdown or HTML content
-  coverImage  String?
-  categoryId  String?
-  category    Category? @relation(fields: [categoryId], references: [id])
-  publishedAt DateTime?
-  views       Int       @default(0)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-}
