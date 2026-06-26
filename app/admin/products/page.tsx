@@ -101,7 +101,7 @@ export default async function AdminProducts({ searchParams }: { searchParams: Pr
         <h1 className="text-3xl font-bold">Products</h1>
       </div>
 
-      {/* Create Form */}
+      {/* Create Form */}h
       <div className="bg-[#161622] rounded-2xl p-6 mb-8 border border-white/10">
         <h3 className="font-semibold mb-4">เพิ่มสินค้าใหม่</h3>
         <form action={createProduct} className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
@@ -115,7 +115,7 @@ export default async function AdminProducts({ searchParams }: { searchParams: Pr
 
           <select name="categoryId" className="bg-[#12121A] border border-white/10 rounded-xl px-4 py-3" required>
             <option value="">เลือกหมวดหมู่</option>
-            {categories.map(c => (
+            {categories.map((c: (typeof categories)[number]) => (
               <option key={c.id} value={c.id}>{c.name}</option>
             ))}
           </select>
