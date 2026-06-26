@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
-import { Prisma } from '@prisma/client'
+import type { Prisma } from '@prisma/client'
 import ProductCard from '@/components/ProductCard'
 import SortSelect from '@/components/SortSelect'
 
