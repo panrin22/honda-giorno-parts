@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
-import type { Prisma } from '@prisma/client'
 import ProductCard from '@/components/ProductCard'
 import SortSelect from '@/components/SortSelect'
 
@@ -22,7 +21,7 @@ export default async function ShopPage({ searchParams }: { searchParams: Promise
   const categories = await prisma.category.findMany({ orderBy: { name: 'asc' } })
 
   // Build query
-  const where: Prisma.ProductWhereInput = {}
+      const where: Record<string, unknown> = {}
   if (q) {
     where.name = { contains: q }
   }
@@ -32,7 +31,7 @@ export default async function ShopPage({ searchParams }: { searchParams: Promise
   }
 
   // Sort
-  let orderBy: Prisma.ProductOrderByWithRelationInput = { isPopular: 'desc' }
+      let orderBy: Record<string, unknown> = { isPopular: 'desc' }
   if (sort === 'price-low') orderBy = { price: 'asc' }
   if (sort === 'price-high') orderBy = { price: 'desc' }
   if (sort === 'newest') orderBy = { createdAt: 'desc' }
