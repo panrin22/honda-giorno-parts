@@ -11,7 +11,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ name, price, discountPrice, slug, images }: ProductCardProps) {
   const hasDiscount = discountPrice && discountPrice < price
-  let imageSrc = null
+    let imageSrc: string | null = null
 
   if (images) {
     try {
