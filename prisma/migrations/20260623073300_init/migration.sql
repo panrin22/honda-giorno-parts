@@ -1,14 +1,16 @@
 -- CreateTable
 CREATE TABLE "Category" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Category_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Product" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "price" INTEGER NOT NULL,
@@ -20,24 +22,22 @@ CREATE TABLE "Product" (
     "categoryId" TEXT NOT NULL,
     "isPopular" BOOLEAN NOT NULL DEFAULT false,
     "views" INTEGER NOT NULL DEFAULT 0,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
-    CONSTRAINT "Product_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Product_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Article" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "content" TEXT NOT NULL,
-    "coverImage" TEXT,
-    "categoryId" TEXT,
-    "publishedAt" DATETIME,
+    "categoryId" TEXT NOT NULL,
     "views" INTEGER NOT NULL DEFAULT 0,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
-    CONSTRAINT "Article_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category" ("id") ON DELETE SET NULL ON UPDATE CASCADE
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Article_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -48,3 +48,9 @@ CREATE UNIQUE INDEX "Product_slug_key" ON "Product"("slug");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Article_slug_key" ON "Article"("slug");
+
+-- AddForeignKey
+ALTER TABLE "Product" ADD CONSTRAINT "Product_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Article" ADD CONSTRAINT "Article_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
