@@ -24,7 +24,7 @@ export default function ProductCard({ name, price, discountPrice, slug, images }
   const usePlaceholder = !imageSrc || imageSrc.startsWith('/uploads/') || imageSrc === '/file.svg'
   const displaySrc = usePlaceholder 
     ? `https://picsum.photos/400/300?random=${encodeURIComponent(name.substring(0,10))}`
-    : imageSrc
+        : imageSrc ?? ''
 
   return (
     <Link href={`/product/${slug}`} className="block bg-[#161622] rounded-xl overflow-hidden hover:border-[#FF5722]/50 border border-transparent transition group">
